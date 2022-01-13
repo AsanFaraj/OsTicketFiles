@@ -1,0 +1,21 @@
+
+version: '3.3'
+
+services:
+   myostdb:
+     image: mysql:5.7
+     restart: always
+     environment:
+       MYSQL_DATABASE: 'myost'
+       MYSQL_ROOT_PASSWORD: 'root'
+     ports:
+        - "3306:3306"
+     expose:
+        - "3306"
+   app:
+     depends_on:
+       - myostdb
+     image: asanfaraj/myost:latest
+     ports:
+       - "8000:80"
+     restart: always
